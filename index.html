@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDX Prompt Store</title>
+ <style>
+    :root {
+      --bg-dark: #0b1120;
+      --bg-mid: #111827;
+      --bg-soft: #111827;
+      --panel: #ffffff;
+      --panel-2: #f6f1ea;
+      --accent: #ff7a1a;
+      --accent-dark: #e85d00;
+      --text: #f8fafc;
+      --text-dark: #111827;
+      --muted: #cbd5e1;
+      --shadow: rgba(0, 0, 0, 0.22);
+      --border: rgba(255,255,255,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 24px 16px 40px;
+      background: radial-gradient(circle at top, #1f2937 0%, var(--bg-dark) 35%, #070d18 100%);
+      color: var(--text-dark);
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 16px rgba(255, 122, 26, 0.35);
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(255, 122, 26, 0.4);
+    }
+
+    img {
+      width: 100%;
+      max-width: 450px;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    .photo-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 450px;
+      margin: 15px auto;
+      overflow: visible;
+    }
+
+    .serial-badge {
+      position: absolute;
+      top: 12px;
+      left: -10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.9rem;
+      box-shadow: 0 8px 18px rgba(255, 122, 26, 0.35);
+      z-index: 2;
+    }
+
+    .prompt-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f8f4ef 100%);
+      border: 1px solid rgba(17, 24, 39, 0.08);
+      border-radius: 18px;
+      padding: 18px;
+      margin: 20px auto;
+      max-width: 560px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+    }
+
+    .search-container {
+      position: relative;
+      max-width: 500px;
+      margin: 18px auto 12px;
+    }
+
+    .search-container input {
+      width: 100%;
+      height: 52px;
+      border: 2px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      padding: 0 52px 0 18px;
+      font-size: 18px;
+      outline: none;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+      background: rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    .search-container input::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .search-label {
+      text-align: center;
+      margin: 14px auto 0;
+      color: #f8fafc;
+      font-family: Cambria, Georgia, serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 1rem;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      z-index: 2;
+      pointer-events: none;
+      color: #fff;
+    }
+
+    .prompt-card h2 {
+      margin-top: 0;
+      color: var(--text-dark);
+    }
+
+    .prompt-box {
+      max-width: 92%;
+      margin: 12px auto 16px;
+      background: #f4f4f4;
+      border: 1px solid #ccc;
+      padding: 12px 14px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      max-height: 180px;
+      overflow: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #111827;
+    }
+
+    </style>
+</head>
+<body>
+<div style="max-width:560px; margin:auto; padding:20px;">
+<div style="background:linear-gradient(135deg, #111827 0%, #1b2336 100%); color:white; padding:24px 20px; border-radius:18px; text-align:center; box-shadow: 0 12px 30px rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.08);">
+  <h1 style="margin:0; font-size: 2rem;">🔥 RDX Prompt Store 🔥</h1>
+</div>
+<div class="search-container">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input
+        type="text"
+        id="searchBox"
+        placeholder="Search Prompt..."
+        onkeyup="searchPrompt()">
+</div>
+<p class="search-label">FREE AND PREMIUM PROMPTS</p>
+
+<div class="prompt-card" data-name="Hanumanji Prompt">
+  <div class="photo-wrap">
+    <span class="serial-badge">1</span>
+    <img src="images/Picsart_26-09-13_16-42-43-291.png" alt="Free Prompt">
+  </div>
+  <h2>Hanumanji Prompt</h2>
+
+  <div id="freePrompt" class="prompt-box">
+Create an ultra-detailed cinematic dark fantasy gaming poster, vertical 3:4 composition, 8K quality, Unreal Engine 5 style, HDR, dramatic lighting.
+
+A powerful muscular warrior stands in the foreground, wearing black tactical pants with white graphic patterns, white high-top sneakers, a black face mask, and wild spiky silver-white hair. His eyes glow with intense electric blue light. Bright blue lightning energy flows around his entire body, with glowing electric veins across his muscular torso and arms. Give him a powerful, fearless monster-warrior presence.
+
+Behind him stands a gigantic terrifying divine monkey-warrior inspired monster, extremely muscular and enormous, with long wild dark hair, glowing fiery red eyes, sharp fangs, dark rugged skin, multiple sacred prayer beads, red cloth draped around his body, and a huge powerful tail. His expression is fierce and intimidating, roaring toward the sky.
+
+The background is a massive apocalyptic battlefield with dark storm clouds, enormous blue lightning bolts, burning ruins, floating debris, destroyed ancient structures, smoke, sparks, and dramatic atmospheric effects.
+
+Make the foreground warrior and giant monkey-warrior perfectly composed like a professional gaming poster. Strong depth, realistic anatomy, ultra-detailed textures, cinematic shadows, volumetric lighting, intense blue and red energy contrast, epic scale, photorealistic, 8K, HDR, masterpiece quality.
+  </div>
+
+  <button onclick="copyFreePrompt()">Copy Prompt</button>
+</div>
+
+<div class="prompt-card" data-name="King prompt">
+  <div class="photo-wrap">
+    <span class="serial-badge">2</span>
+    <img src="images/Picsart_26-09-13_16-51-31-214.png" alt="Premium Prompt">
+  </div>
+  <h2>King Prompt - ₹10</h2>
+
+  <button onclick="openRazorpay()" style="background-color: #ff6600; color: white; padding: 12px 25px; font-size: 16px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Buy Now</button>
+</div>
+
+<div class="prompt-card" data-name="Monster Energy BMW Prompt">
+  <div class="photo-wrap">
+    <span class="serial-badge">3</span>
+    <img src="images/file_00000000503081f4bf1e4bf014a61b0c.png" alt="Free Prompt">
+  </div>
+  <h2>Monster Energy BMW Prompt</h2>
+
+  <div id="freePrompt3" class="prompt-box">
+Ultra realistic 3:4 ratio 8K photo of a video game character. His outfit will remain same as reference. The character is leaning stylishly against the side of a shiny black metallic BMW M4, holding a green Monster Energy drink can in his right hand.
+
+Behind the character, a large, semi-transparent holographic gaming profile screen is displayed with a fade effect.
+
+The background is an epic apocalyptic wasteland featuring jagged rock peaks under a fiery golden sky with dragon silhouettes and a dark purple fantasy thunderstorm overhead. The foreground is framed by blurred, heavy rusty chains. The atmosphere is filled with smoke, volumetric fog, and glowing embers, featuring dramatic backlighting and cinematic depth.
+  </div>
+
+  <button onclick="copyFreePrompt3()">Copy Prompt</button>
+</div>
+
+<script>
+function copyFreePrompt() {
+    const textToCopy = document.getElementById("freePrompt").innerText;
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => alert("Prompt copied to clipboard!"))
+            .catch(() => fallbackCopy(textToCopy));
+    } else {
+        fallbackCopy(textToCopy);
+    }
+}
+
+function copyFreePrompt3() {
+    const textToCopy = document.getElementById("freePrompt3").innerText;
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => alert("Prompt copied to clipboard!"))
+            .catch(() => fallbackCopy(textToCopy));
+    } else {
+        fallbackCopy(textToCopy);
+    }
+}
+
+function fallbackCopy(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    textarea.style.top = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+        document.execCommand("copy");
+        alert("Prompt copied to clipboard!");
+    } catch (err) {
+        alert("Copy failed. Please copy manually.");
+        console.error("Copy failed:", err);
+    }
+
+    document.body.removeChild(textarea);
+}
+
+function searchPrompt() {
+    const input = document.getElementById("searchBox").value.trim().toLowerCase();
+    const cards = document.querySelectorAll(".prompt-card");
+
+    cards.forEach(function(card) {
+        const name = (card.getAttribute("data-name") || "").toLowerCase();
+        const text = card.textContent.toLowerCase();
+        const matches = !input || name.includes(input) || text.includes(input);
+        card.style.display = matches ? "block" : "none";
+    });
+}
+</script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+function openRazorpay() {
+    const key = "rzp_live_Tbsu7FsP23JXr2";
+    const amount = 1000;
+
+    if (!key || key === "rzp_test_YOUR_KEY_HERE") {
+        alert("Razorpay key missing. Add your real test/live key.");
+        return;
+    }
+
+    const options = {
+        key: key,
+        amount: amount,
+        currency: "INR",
+        name: "Premium Prompt",
+        description: "Purchase Premium Prompt",
+        handler: function (response) {
+            alert("Payment successful");
+            window.location.href = "success.html";
+        },
+        theme: { color: "#ff6600" }
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.open();
+}
+</script>
+
+<section style="max-width:560px; margin: 24px auto 0; padding: 20px; background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.12); text-align: center;">
+    <p style="font-size: 14px; color: #e2e8f0; margin: 0 0 12px; letter-spacing: 0.4px;">Need Help?</p>
+    <a href="https://wa.me/917585907130?text=Hi,%20I%20have%20an%20issue%20regarding%20the%20Premium%20Prompt"
+       target="_blank"
+       style="display: inline-block; background: linear-gradient(135deg, #25D366 0%, #1ea95d 100%); color: white; padding: 12px 18px; text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 14px; box-shadow: 0 8px 18px rgba(37,211,102,0.35);">
+        Contact via WhatsApp
+    </a>
+</section>
+
+</body>
+</body>
+</html>

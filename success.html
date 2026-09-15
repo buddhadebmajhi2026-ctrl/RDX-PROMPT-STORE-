@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Successful - Premium Prompt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg-dark: #0b1120;
+            --bg-soft: #111827;
+            --panel: #ffffff;
+            --panel-2: #f8f4ef;
+            --accent: #ff7a1a;
+            --accent-dark: #e85d00;
+            --text-dark: #111827;
+            --text-light: #f8fafc;
+            --muted: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle at top, #1f2937 0%, var(--bg-dark) 35%, #070d18 100%);
+            padding: 28px 16px;
+            color: var(--text-dark);
+        }
+
+        .card {
+            max-width: 560px;
+            margin: auto;
+            background: linear-gradient(180deg, #ffffff 0%, #f9f5f1 100%);
+            padding: 24px 20px;
+            border-radius: 18px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+            border: 1px solid rgba(17,24,39,0.06);
+        }
+
+        h2 {
+            margin: 0 0 12px;
+            color: #0c6b2d;
+            font-size: 1.9rem;
+        }
+
+        p {
+            margin: 0 0 14px;
+            color: var(--text-dark);
+        }
+
+        #premiumPromptText {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: left;
+            word-break: break-word;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 8px 16px rgba(255, 122, 26, 0.35);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>✔ Payment Verified Successfully!</h2>
+        <p>Here is your Premium Prompt:</p>
+
+        <div id="premiumPromptText">
+            Ultra-realistic cinematic portrait of a gaming character side view side look, (same face as reference) sitting firmly on a grand, stone chair, one hand resting on the hilt of a glowing sword placed vertically with an camera angles. His posture back straight, viewer. The background has a mix of red and electric blue lighting, with floating dust and motion suggesting chaos.Style: cinematic power shot, 8K detail, dark contrast, dramatic Tools and also smoke in the ground dark smoke and lighting. His dress unchanged from reference image and beside the character add Gaming profile fully visible without hiding anything with 3d style and fire on the profile and scratch and like stone type of profile and all visible with high quality, low angle perspective shot in the ratio ar-3:4
+        </div>
+
+        <div style="margin-top: 18px; text-align: center;">
+            <button onclick="copyPrompt()">Copy Prompt</button>
+        </div>
+    </div>
+
+    <script>
+    function copyPrompt() {
+        const textToCopy = document.getElementById("premiumPromptText").innerText;
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(textToCopy)
+                .then(function() {
+                    alert("Prompt copied to clipboard!");
+                })
+                .catch(function() {
+                    fallbackCopy(textToCopy);
+                });
+        } else {
+            fallbackCopy(textToCopy);
+        }
+    }
+
+    function fallbackCopy(text) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        textarea.style.top = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            document.execCommand("copy");
+            alert("Prompt copied to clipboard!");
+        } catch (err) {
+            alert("Copy failed. Please copy manually.");
+            console.error("Copy failed:", err);
+        }
+
+        document.body.removeChild(textarea);
+    }
+    </script>
+</body>
+</html>
