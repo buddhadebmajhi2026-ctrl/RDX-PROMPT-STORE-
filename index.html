@@ -400,11 +400,7 @@ The background is an epic apocalyptic wasteland featuring jagged rock peaks unde
   </div>
   <h2>KING PROMPT - ₹5</h2>
 
-  <div class="prompt-box">
-A hyper-realistic 3D cinematic render of a cool, stylish young male video game character walking forward, stepping out of a giant, glowing, transparent glass smartphone screen. The character wears the same dress as uploaded. The giant glass screen behind him on the left side is a cracked 3D display showing a Free Fire Max profile interface. Floating around the character and the screen are glowing 3D effects. The setting has a dark, reflective floor with warm golden cinematic lighting in the background. 16k resolution, highly detailed, photorealistic, in the ratio 3:4.
-  </div>
-
-  <button class="premium-buy-button" onclick="openRazorpay(500, 'KING PROMPT')">Buy Now</button>
+  <button class="premium-buy-button" onclick="openRazorpay(500, 'KING PROMPT', 'A hyper-realistic 3D cinematic render of a cool, stylish young male video game character walking forward, stepping out of a giant, glowing, transparent glass smartphone screen. The character wears the same dress as uploaded. The giant glass screen behind him on the left side is a cracked 3D display showing a Free Fire Max profile interface. Floating around the character and the screen are glowing 3D effects. The setting has a dark, reflective floor with warm golden cinematic lighting in the background. 16k resolution, highly detailed, photorealistic, in the ratio 3:4.')">Buy Now</button>
 </div>
 
 <div class="pagination-controls" aria-label="Prompt pagination">
@@ -575,7 +571,7 @@ window.addEventListener("load", function() {
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-function openRazorpay(amountInPaise = 200, title = "Premium Prompt") {
+function openRazorpay(amountInPaise = 200, title = "Premium Prompt", promptText = "Your purchase was successful. Please copy the prompt below and use it as needed.") {
     const key = "rzp_live_Tbsu7FsP23JXr2";
     const amount = Number(amountInPaise) || 200;
 
@@ -591,8 +587,10 @@ function openRazorpay(amountInPaise = 200, title = "Premium Prompt") {
         name: "RDX Prompt Store",
         description: title,
         handler: function (response) {
+            const encodedTitle = encodeURIComponent(title || "Premium Prompt");
+            const encodedPrompt = encodeURIComponent(promptText || "Your purchase was successful. Please copy the prompt below and use it as needed.");
             alert("Payment successful");
-            window.location.href = "success.html";
+            window.location.href = "success.html?title=" + encodedTitle + "&prompt=" + encodedPrompt;
         },
         theme: { color: "#ff6600" }
     };
