@@ -47,7 +47,7 @@
             color: var(--text-dark);
         }
 
-        #premiumPromptText {
+        .prompt-box {
             background: #f9f9f9;
             border: 1px solid #ddd;
             padding: 16px;
@@ -57,6 +57,7 @@
             font-size: 15px;
             line-height: 1.6;
             color: var(--text-dark);
+            white-space: pre-wrap;
         }
 
         button {
@@ -75,10 +76,10 @@
 <body>
     <div class="card">
         <h2>✔ Payment Verified Successfully!</h2>
-        <p>Here is your Premium Prompt:</p>
+        <p id="successMessage">Your prompt is ready below:</p>
 
-        <div id="premiumPromptText">
-            Ultra-realistic cinematic portrait of a gaming character side view side look, (same face as reference) sitting firmly on a grand, stone chair, one hand resting on the hilt of a glowing sword placed vertically with an camera angles. His posture back straight, viewer. The background has a mix of red and electric blue lighting, with floating dust and motion suggesting chaos.Style: cinematic power shot, 8K detail, dark contrast, dramatic Tools and also smoke in the ground dark smoke and lighting. His dress unchanged from reference image and beside the character add Gaming profile fully visible without hiding anything with 3d style and fire on the profile and scratch and like stone type of profile and all visible with high quality, low angle perspective shot in the ratio ar-3:4
+        <div id="premiumPromptText" class="prompt-box">
+            Your purchase was successful. Please copy the prompt below and use it as needed.
         </div>
 
         <div style="margin-top: 18px; text-align: center;">
@@ -87,6 +88,13 @@
     </div>
 
     <script>
+    const params = new URLSearchParams(window.location.search);
+    const promptTitle = params.get("title") || "Premium Prompt";
+    const promptText = params.get("prompt") || "Your purchase was successful. Please copy the prompt below and use it as needed.";
+
+    document.getElementById("successMessage").textContent = "Here is your " + promptTitle + ":";
+    document.getElementById("premiumPromptText").textContent = promptText;
+
     function copyPrompt() {
         const textToCopy = document.getElementById("premiumPromptText").innerText;
 

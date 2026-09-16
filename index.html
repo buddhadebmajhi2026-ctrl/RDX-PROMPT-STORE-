@@ -261,6 +261,51 @@
       box-shadow: 0 12px 20px rgba(255, 122, 26, 0.35);
     }
 
+    .pagination-controls {
+      max-width: 560px;
+      margin: 18px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pagination-controls button {
+      min-width: 110px;
+      padding: 10px 18px;
+      font-size: 0.95rem;
+    }
+
+    .pagination-controls button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .page-indicator {
+      color: #f8fafc;
+      font-weight: 700;
+      min-width: 110px;
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    .premium-buy-button {
+      background: linear-gradient(135deg, #ff7a1a 0%, #e85d00 100%);
+      color: white;
+      padding: 12px 26px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 12px;
+      min-width: 150px;
+      box-shadow: 0 12px 22px rgba(255, 122, 26, 0.28);
+    }
+
     </style>
 </head>
 <body>
@@ -313,17 +358,31 @@ Make the foreground warrior and giant monkey-warrior perfectly composed like a p
   </div>
   <h2>King Prompt - ₹2</h2>
 
-  <button onclick="openRazorpay()" style="background-color: #ff6600; color: white; padding: 12px 25px; font-size: 16px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Buy Now</button>
+  <button class="premium-buy-button" onclick="openRazorpay(200, 'King Prompt')">Buy Now</button>
+</div>
+
+<div class="prompt-card" data-name="Free Fire Profile Card Prompt">
+  <div class="photo-wrap">
+    <span class="serial-badge">3</span>
+    <img src="images/file_00000000f9b482118158bb75b4a07917.png" alt="Free Prompt">
+  </div>
+  <h2>Free Fire Profile Card Prompt</h2>
+
+  <div id="freePrompt3" class="prompt-box">
+A realistic, high-quality close-up photo of a character wearing a custom dress as uploaded. The character holding a floating virtual card in their hand using their thumb and fingers. The card displays a detailed free fire profile interface with the username. The background is a soft, blurry depth-of-field effect, keeping the focus sharp on the Instagram card and the hand. The card edge is glowing in red flame. 8k ultra realistic, 3D card. Background of mossy stone steps and autumn trees, sunlight filtering through leaves, Unreal Engine 5 render style, 8k resolution, cinematic curved background, leaves are glowing, lighting, sharp focus, vertical aspect ratio -ar 9:16 –v 6.0. In the ratio of 3:4.
+  </div>
+
+  <button onclick="copyFreePrompt3()">Copy Prompt</button>
 </div>
 
 <div class="prompt-card" data-name="Monster Energy BMW Prompt">
   <div class="photo-wrap">
-    <span class="serial-badge">3</span>
+    <span class="serial-badge">4</span>
     <img src="images/file_00000000503081f4bf1e4bf014a61b0c.png" alt="Free Prompt">
   </div>
   <h2>Monster Energy BMW Prompt</h2>
 
-  <div id="freePrompt3" class="prompt-box">
+  <div id="freePrompt4" class="prompt-box">
 Ultra realistic 3:4 ratio 8K photo of a video game character. His outfit will remain same as reference. The character is leaning stylishly against the side of a shiny black metallic BMW M4, holding a green Monster Energy drink can in his right hand.
 
 Behind the character, a large, semi-transparent holographic gaming profile screen is displayed with a fade effect.
@@ -331,7 +390,27 @@ Behind the character, a large, semi-transparent holographic gaming profile scree
 The background is an epic apocalyptic wasteland featuring jagged rock peaks under a fiery golden sky with dragon silhouettes and a dark purple fantasy thunderstorm overhead. The foreground is framed by blurred, heavy rusty chains. The atmosphere is filled with smoke, volumetric fog, and glowing embers, featuring dramatic backlighting and cinematic depth.
   </div>
 
-  <button onclick="copyFreePrompt3()">Copy Prompt</button>
+  <button onclick="copyFreePrompt4()">Copy Prompt</button>
+</div>
+
+<div class="prompt-card" data-name="KING PROMPT">
+  <div class="photo-wrap">
+    <span class="serial-badge">5</span>
+    <img src="images/file_00000000a02c8211b68142aae6bbfff4.png" alt="Premium Prompt">
+  </div>
+  <h2>KING PROMPT - ₹5</h2>
+
+  <div class="prompt-box">
+A hyper-realistic 3D cinematic render of a cool, stylish young male video game character walking forward, stepping out of a giant, glowing, transparent glass smartphone screen. The character wears the same dress as uploaded. The giant glass screen behind him on the left side is a cracked 3D display showing a Free Fire Max profile interface. Floating around the character and the screen are glowing 3D effects. The setting has a dark, reflective floor with warm golden cinematic lighting in the background. 16k resolution, highly detailed, photorealistic, in the ratio 3:4.
+  </div>
+
+  <button class="premium-buy-button" onclick="openRazorpay(500, 'KING PROMPT')">Buy Now</button>
+</div>
+
+<div class="pagination-controls" aria-label="Prompt pagination">
+  <button id="prevPageBtn" type="button">Previous</button>
+  <span id="pageIndicator" class="page-indicator">Page 1</span>
+  <button id="nextPageBtn" type="button">Next</button>
 </div>
 
 <script>
@@ -349,6 +428,18 @@ function copyFreePrompt() {
 
 function copyFreePrompt3() {
     const textToCopy = document.getElementById("freePrompt3").innerText;
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => alert("Prompt copied to clipboard!"))
+            .catch(() => fallbackCopy(textToCopy));
+    } else {
+        fallbackCopy(textToCopy);
+    }
+}
+
+function copyFreePrompt4() {
+    const textToCopy = document.getElementById("freePrompt4").innerText;
 
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(textToCopy)
@@ -380,19 +471,92 @@ function fallbackCopy(text) {
     document.body.removeChild(textarea);
 }
 
+const promptCards = Array.from(document.querySelectorAll(".prompt-card"));
+const promptsPerPage = 3;
+let currentPage = 0;
+
+function updatePaginationControls(totalPages) {
+    const prevButton = document.getElementById("prevPageBtn");
+    const nextButton = document.getElementById("nextPageBtn");
+    const pageIndicator = document.getElementById("pageIndicator");
+
+    if (prevButton) {
+        prevButton.disabled = currentPage === 0;
+    }
+
+    if (nextButton) {
+        nextButton.disabled = currentPage >= totalPages - 1;
+    }
+
+    if (pageIndicator) {
+        pageIndicator.textContent = "Page " + (currentPage + 1) + " / " + totalPages;
+    }
+}
+
+function renderPromptPage() {
+    const visibleCards = promptCards.filter(function(card) {
+        return card.dataset.visible !== "false";
+    });
+
+    const totalPages = Math.max(1, Math.ceil(visibleCards.length / promptsPerPage));
+
+    if (currentPage >= totalPages) {
+        currentPage = totalPages - 1;
+    }
+
+    promptCards.forEach(function(card) {
+        card.style.display = "none";
+    });
+
+    visibleCards.forEach(function(card, index) {
+        const start = currentPage * promptsPerPage;
+        const end = start + promptsPerPage;
+        const pageIndex = index >= start && index < end;
+        card.style.display = pageIndex ? "block" : "none";
+    });
+
+    updatePaginationControls(totalPages);
+}
+
 function searchPrompt() {
     const input = document.getElementById("searchBox").value.trim().toLowerCase();
-    const cards = document.querySelectorAll(".prompt-card");
 
-    cards.forEach(function(card) {
+    promptCards.forEach(function(card) {
         const name = (card.getAttribute("data-name") || "").toLowerCase();
         const text = card.textContent.toLowerCase();
         const matches = !input || name.includes(input) || text.includes(input);
-        card.style.display = matches ? "block" : "none";
+        card.dataset.visible = matches ? "true" : "false";
     });
+
+    currentPage = 0;
+    renderPromptPage();
 }
 
+document.getElementById("prevPageBtn").addEventListener("click", function() {
+    if (currentPage > 0) {
+        currentPage -= 1;
+        renderPromptPage();
+    }
+});
+
+document.getElementById("nextPageBtn").addEventListener("click", function() {
+    const visibleCards = promptCards.filter(function(card) {
+        return card.dataset.visible !== "false";
+    });
+    const totalPages = Math.max(1, Math.ceil(visibleCards.length / promptsPerPage));
+
+    if (currentPage < totalPages - 1) {
+        currentPage += 1;
+        renderPromptPage();
+    }
+});
+
 window.addEventListener("load", function() {
+    promptCards.forEach(function(card) {
+        card.dataset.visible = "true";
+    });
+    renderPromptPage();
+
     const popup = document.getElementById("subscribePopup");
     if (popup) {
         popup.classList.add("show");
@@ -411,9 +575,9 @@ window.addEventListener("load", function() {
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-function openRazorpay() {
+function openRazorpay(amountInPaise = 200, title = "Premium Prompt") {
     const key = "rzp_live_Tbsu7FsP23JXr2";
-    const amount = 200;
+    const amount = Number(amountInPaise) || 200;
 
     if (!key || key === "rzp_test_YOUR_KEY_HERE") {
         alert("Razorpay key missing. Add your real test/live key.");
@@ -424,8 +588,8 @@ function openRazorpay() {
         key: key,
         amount: amount,
         currency: "INR",
-        name: "Premium Prompt",
-        description: "Purchase Premium Prompt",
+        name: "RDX Prompt Store",
+        description: title,
         handler: function (response) {
             alert("Payment successful");
             window.location.href = "success.html";
