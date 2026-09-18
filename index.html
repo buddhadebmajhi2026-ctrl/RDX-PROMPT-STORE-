@@ -412,6 +412,22 @@ The background is an epic apocalyptic wasteland featuring jagged rock peaks unde
   <button class="premium-buy-button" onclick="openRazorpay(500, 'KING PROMPT', 'A hyper-realistic 3D cinematic render of a cool, stylish young male video game character walking forward, stepping out of a giant, glowing, transparent glass smartphone screen. The character wears the same dress as uploaded. The giant glass screen behind him on the left side is a cracked 3D display showing a Free Fire Max profile interface. Floating around the character and the screen are glowing 3D effects. The setting has a dark, reflective floor with warm golden cinematic lighting in the background. 16k resolution, highly detailed, photorealistic, in the ratio 3:4.')">Buy Now</button>
 </div>
 
+<div class="prompt-card" data-name="Lava Ghost Battle Prompt">
+  <div class="photo-wrap">
+    <span class="serial-badge">6</span>
+    <img src="images/WhatsApp Image 2026-09-18 at 7.12.53 AM.png" alt="Free Prompt">
+  </div>
+  <h2>Lava Ghost Battle Prompt</h2>
+
+  <div id="freePrompt6" class="prompt-box">
+Ultra realistic extreme low-angle cinematic shot of the exact uploaded character wearing the 100% same outfit, hairstyle, mask, accessories, and body proportions (no changes). The character stands powerfully on the edge of a gigantic lava mountain, holding a massive glowing black battle axe in the left hand. White glowing ghost eyes, subtle cracked skin on face and neck with glowing white veins, dark shadow aura, black spectral mist swirling around the body, monochrome black ghost theme.
+
+The ground is shattered with glowing molten lava flowing through deep cracks, volcanic rocks floating in the air, lava eruptions, fire sparks, ash particles, smoke, and lightning illuminating the sky. Giant burning mountains and an active volcano in the background. Behind the character, the uploaded Free Fire profile appears as a huge 3D glowing holographic card, fully visible, floating above the lava landscape with fiery orange reflections. Dynamic battle-ready stance, cape and outfit flowing in the hot wind, cinematic HDR lighting, ultra-detailed realistic skin texture, sharp focus, high contrast, dark fantasy masterpiece, 8K, hyper realistic, Unreal Engine quality --ar 3:4
+  </div>
+
+  <button onclick="copyFreePrompt6()">Copy Prompt</button>
+</div>
+
 <div class="pagination-controls" aria-label="Prompt pagination">
   <button id="prevPageBtn" type="button">Previous</button>
   <span id="pageIndicator" class="page-indicator">Page 1</span>
@@ -445,6 +461,18 @@ function copyFreePrompt3() {
 
 function copyFreePrompt4() {
     const textToCopy = document.getElementById("freePrompt4").innerText;
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => alert("Prompt copied to clipboard!"))
+            .catch(() => fallbackCopy(textToCopy));
+    } else {
+        fallbackCopy(textToCopy);
+    }
+}
+
+function copyFreePrompt6() {
+    const textToCopy = document.getElementById("freePrompt6").innerText;
 
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(textToCopy)
